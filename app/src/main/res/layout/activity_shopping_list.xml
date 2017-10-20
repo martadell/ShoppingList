@@ -31,7 +31,7 @@
             android:layout_toStartOf="@+id/btn_ad"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Name" />
+            android:text="" />
 
         <Button
             android:id="@+id/btn_ad"
