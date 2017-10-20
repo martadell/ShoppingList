@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Llista de la compra</string>
+    <string name="confirm">Confirmar</string>
+    <string name="confirm_message">Estàs segur de que vols eliminar</string>
+    <string name="remove">Eliminar</string>
+</resources>
