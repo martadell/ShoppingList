@@ -7,6 +7,9 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -147,5 +150,35 @@ public class ShoppingListActivity extends AppCompatActivity {
             edit_item.setText("");}
 
         list.smoothScrollToPosition(itemlist.size()-1);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.options, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected (MenuItem item)
+    {
+        switch (item.getItemId()) {
+            case R.id.clear_checked:
+                clearChecked();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void clearChecked() {
+        int i =0;
+        while (i < itemlist.size()) {
+            if (itemlist.get(i).isChecked()){
+                itemlist.remove(i);}
+            else {
+                i++;}
+        }
+        adapter.notifyDataSetChanged();
     }
 }
