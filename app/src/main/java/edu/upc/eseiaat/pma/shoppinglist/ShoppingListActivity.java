@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 public class ShoppingListActivity extends AppCompatActivity {
 
     private static final String FILENAME = "string_list.txt";
+    private static final int MAX_BYTES = 8000;
     private ArrayList<ShoppingItem> itemlist;
     private ShoppingListAdapter adapter;
 
@@ -49,6 +51,29 @@ public class ShoppingListActivity extends AppCompatActivity {
         }
     }
 
+    private void readItemlist() {
+        itemlist = new ArrayList<>();
+        try {
+            FileInputStream fis = openFileInput(FILENAME);
+            byte[] buffer = new byte[MAX_BYTES];
+            int nread = fis.read(buffer);
+            String content = new String (buffer, 0, nread);
+            String[] lines = content.split("\n"); //separar les línies
+            for (String line : lines) { //passa per les linies
+                String[] parts = line.split(";"); //separar els noms dels booleans
+                itemlist.add(new ShoppingItem(parts[0], parts[1].equals("true")));
+            }
+            fis.close();
+
+        } catch (FileNotFoundException e) {
+            Log.i("pauek", "readItemList: FileNotFoundException");
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.e("pauek", "readItemList: IOException");
+            Toast.makeText(this, R.string.cannotread, Toast.LENGTH_SHORT).show();
+        }
+    }
+
     @Override
     protected void onStop() {
         super.onStop();
@@ -64,11 +89,7 @@ public class ShoppingListActivity extends AppCompatActivity {
         btn_add = (Button) findViewById(R.id.btn_ad);
         edit_item = (EditText) findViewById(R.id.edit_item);
 
-        itemlist = new ArrayList<>();
-        itemlist.add(new ShoppingItem ("Patatas", true));
-        itemlist.add(new ShoppingItem ("Papel de vater", true));
-        itemlist.add(new ShoppingItem ("Zanahorias"));
-        itemlist.add(new ShoppingItem ("Copas danone"));
+        readItemlist();
 
         adapter = new ShoppingListAdapter(this, R.layout.shopping_item, itemlist);
 
