@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class ShoppingListActivity extends AppCompatActivity {
 
-    private ArrayList<String> itemlist;
+    private ArrayList<ShoppingItem> itemlist;
     private ShoppingListAdapter adapter;
 
     private ListView list;
@@ -33,10 +33,10 @@ public class ShoppingListActivity extends AppCompatActivity {
         edit_item = (EditText) findViewById(R.id.edit_item);
 
         itemlist = new ArrayList<>();
-        itemlist.add("Patatas");
-        itemlist.add("Papel de vater");
-        itemlist.add("Zanahorias");
-        itemlist.add("Copas danone");
+        itemlist.add(new ShoppingItem ("Patatas", true));
+        itemlist.add(new ShoppingItem ("Papel de vater", true));
+        itemlist.add(new ShoppingItem ("Zanahorias"));
+        itemlist.add(new ShoppingItem ("Copas danone"));
 
         adapter = new ShoppingListAdapter(this, R.layout.shopping_item, itemlist);
 
@@ -47,11 +47,13 @@ public class ShoppingListActivity extends AppCompatActivity {
             }}
         );
 
-        edit_item.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        list.setAdapter(adapter);
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                addItem();
-                return true;
+            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long id) {
+                itemlist.get(pos).toggleChecked();
+                adapter.notifyDataSetChanged();
             }
         });
 
@@ -63,7 +65,7 @@ public class ShoppingListActivity extends AppCompatActivity {
             }
         });
 
-        list.setAdapter(adapter);
+
 
     }
 
@@ -87,8 +89,10 @@ public class ShoppingListActivity extends AppCompatActivity {
     private void addItem() {
         String item_text = edit_item.getText().toString();
         if (!item_text.isEmpty()) {
-            itemlist.add(item_text);
+            itemlist.add(new ShoppingItem(item_text));
             adapter.notifyDataSetChanged();
             edit_item.setText("");}
+
+        list.smoothScrollToPosition(itemlist.size()-1);
     }
 }
