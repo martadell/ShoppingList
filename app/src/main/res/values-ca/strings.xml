@@ -2,9 +2,11 @@
 <resources>
     <string name="app_name">Llista de la compra</string>
     <string name="confirm">Confirmar</string>
-    <string name="confirm_message">Estàs segur de que vols eliminar</string>
     <string name="remove">Eliminar</string>
     <string name="cannotwrite">No s`ha pogut crear el fitxerd de guardat</string>
     <string name="cannotread">No s`ha pogut llegir la llista</string>
     <string name="clear_checked">Eliminar elements sel·leccionats</string>
+    <string name="clear_all">Eliminar tot</string>
+    <string name="confirm_clear_all">Estàs segur de que vols eliminar tots els elements?</string>
+    <string name="confirm_message">Estàs segur de que vols eliminar</string>
 </resources>

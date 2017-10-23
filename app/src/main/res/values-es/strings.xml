@@ -2,9 +2,11 @@
 <resources>
     <string name="app_name">Lista de la compra</string>
     <string name="confirm">Confirmar</string>
-    <string name="confirm_message">¿Estás seguro de que quieres eliminar</string>
     <string name="remove">Eliminar</string>
     <string name="cannotwrite">No se ha podido crear el fichero de guardado</string>
     <string name="cannotread">No se ha podido leer la lista</string>
     <string name="clear_checked">Eliminar elementos seleccionados</string>
+    <string name="clear_all">Eliminar todo</string>
+    <string name="confirm_clear_all">¿Estás seguro de que quieres eliminar todos los elementos?</string>
+    <string name="confirm_message">Estás seguro de que quieres eliminar</string>
 </resources>
